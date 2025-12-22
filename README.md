@@ -28,3 +28,58 @@ formSheet: BottomSheetBehavior 느낌으로 화면 전환
         }}
     /> 
 ```
+
+## TextInput properties 살펴보기
+
+autoCorrect, autoCapitalize, placeHolder 등의 properties를 다룸.
+
+```js
+
+  <TextInput
+      multiline={true}
+```
+iOS는 top, Android center 정렬되므로, `textAlignVertical` top을 설정하여 각 플랫폼이 동일하게 나오도록 구현하자.
+
+공식 문서의 Note 유심히 보기
+
+## TextInput 여러개의 입력을 묶어서 관리하기
+
+각 TextInput 마다 state를 별도로 관리해도 되고, 아래처럼 하나의 객체로 관리해도 좋다.
+
+```js
+  const [inputValues, setInputValues] = useState({
+    amount: '',
+    date: '',
+    description: '',
+  });
+
+  function inputChangedHandler(inputIdentifier, enteredValue) {
+    setInputValues((curInputValues) => {
+      return {
+        ...curInputValues,
+        [inputIdentifier]: enteredValue,
+      };
+    });
+  }
+
+  ...
+
+  <Input
+          style={styles.rowInput}
+          label="Amount"
+          textInputConfig={{
+            ...
+            onChangeText: inputChangedHandler.bind(this, 'amount'),
+            value: inputValues.amount,
+          }}
+        />
+
+```
+
+## 문자열 숫자로 변환하기
+
+```js
++amount
+```
+
++ 기호를 앞에 붙이면 문자열이 숫자로 변환된다.
