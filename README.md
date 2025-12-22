@@ -69,7 +69,7 @@ iOS는 top, Android center 정렬되므로, `textAlignVertical` top을 설정하
           label="Amount"
           textInputConfig={{
             ...
-            onChangeText: inputChangedHandler.bind(this, 'amount'),
+            onChangeText: inputChangedHandler.bind(this, 'amount', value),
             value: inputValues.amount,
           }}
         />
